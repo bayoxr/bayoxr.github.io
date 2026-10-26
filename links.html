@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ahmed Bayour (@bayoxr) — Links</title>
+  <meta name="description" content="Ahmed Bayour (@bayoxr) — Filmmaker, Computer Scientist & Media Designer. Official links to YouTube, Instagram, TikTok, GitHub & Main Portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: "Fira Code Local";
+      src: url("assets/fonts/firacode.ttf") format("truetype");
+      font-weight: 300 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Vazirmatn Local";
+      src: url("assets/fonts/vazirmatn.ttf") format("truetype");
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #0c0c0b;
+      --bg-card: rgba(24, 24, 22, 0.86);
+      --bg-card-hover: rgba(34, 33, 30, 0.96);
+      --fg: #f5f3ee;
+      --fg-muted: rgba(245, 243, 238, 0.64);
+      --line: rgba(245, 243, 238, 0.14);
+      --line-strong: rgba(245, 243, 238, 0.28);
+      --vermilion: #ff5121;
+      --mint: #b8f0d0;
+      --mint-ink: #0f2419;
+      --font-sans: "Space Grotesk", "Vazirmatn Local", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "JetBrains Mono", "Fira Code Local", monospace;
+      --font-ar: "Vazirmatn Local", "Vazirmatn", sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #f6f4ef;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: #ffffff;
+      --fg: #141413;
+      --fg-muted: rgba(20, 20, 19, 0.64);
+      --line: rgba(20, 20, 19, 0.12);
+      --line-strong: rgba(20, 20, 19, 0.26);
+      --vermilion: #e94314;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 81, 33, 0.16), transparent 55%),
+        radial-gradient(circle at 85% 90%, rgba(184, 240, 208, 0.09), transparent 50%),
+        var(--bg);
+      color: var(--fg);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 16px 40px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    body[data-lang="ar"] {
+      font-family: var(--font-ar);
+    }
+    body[data-lang="ar"] [data-ar] {
+      font-family: var(--font-ar);
+      letter-spacing: 0 !important;
+    }
+
+    /* Subtle Film Grain */
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.28;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hub-shell {
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Top Controls Bar */
+    .hub-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .lang-pill {
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--fg-muted);
+      transition: all 0.2s ease;
+    }
+    .lang-pill.is-active {
+      background: var(--vermilion);
+      color: #ffffff;
+    }
+    .theme-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+
+    /* Profile Card */
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 16px 12px 6px;
+    }
+    .avatar-ring-wrap {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .avatar-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--vermilion);
+      animation: spinRing 18s linear infinite;
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    .avatar-img {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--line-strong);
+    }
+    .status-dot {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #27c93f;
+      border: 3px solid var(--bg);
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .profile-handle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--vermilion);
+      letter-spacing: 0.12em;
+      margin-top: 3px;
+    }
+    .profile-roles {
+      font-size: 14px;
+      color: var(--fg-muted);
+      margin-top: 8px;
+      line-height: 1.45;
+      max-width: 34ch;
+    }
+    .profile-quote {
+      margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg);
+    }
+
+    /* Hero Main Website Button with Custom BAYOXR Aperture Logo */
+    .main-site-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 81, 33, 0.18), rgba(24, 24, 22, 0.95));
+      border: 1.5px solid var(--vermilion);
+      box-shadow: 0 18px 40px rgba(255, 81, 33, 0.18);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+    }
+    .main-site-card:hover, .main-site-card:active {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 22px 48px rgba(255, 81, 33, 0.28);
+    }
+    .main-site-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--vermilion);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(255, 81, 33, 0.4);
+    }
+    .logo-badge svg {
+      width: 28px;
+      height: 28px;
+      animation: spinRing 16s linear infinite;
+    }
+    .main-site-text h2 {
+      font-size: 16.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .main-site-text p {
+      font-size: 12.5px;
+      color: var(--fg-muted);
+      margin-top: 2px;
+    }
+    .main-site-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    /* Social Link Cards Stack */
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 15px 18px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, background 0.22s ease;
+    }
+    .link-card:hover, .link-card:active {
+      transform: translateY(-2px);
+      border-color: var(--vermilion);
+      background: var(--bg-card-hover);
+    }
+    .link-card.mint-accent:hover {
+      border-color: var(--mint);
+    }
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .link-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--fg);
+    }
+    .link-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+    .link-info {
+      min-width: 0;
+    }
+    .link-title {
+      font-size: 15.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .link-sub {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .link-badge {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+      color: var(--fg-muted);
+      flex-shrink: 0;
+    }
+
+    /* Featured Video Card */
+    .video-spotlight {
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .video-spotlight-top {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      color: var(--fg-muted);
+      border-bottom: 1px solid var(--line);
+    }
+    .video-thumb-btn {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.86;
+      transition: transform 0.4s ease;
+    }
+    .video-thumb-btn:hover img {
+      transform: scale(1.04);
+    }
+    .video-play-badge {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.28);
+    }
+    .video-play-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--vermilion);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 12px 28px rgba(255, 81, 33, 0.5);
+    }
+    .video-caption {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    /* Footer Copy Action */
+    .hub-footer {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .copy-pill {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
+    }
+    .copy-pill:hover, .copy-pill:active {
+      border-color: var(--mint);
+      color: var(--mint);
+    }
+    .hub-copyright {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--fg-muted);
+      letter-spacing: 0.12em;
+    }
+  </style>
+</head>
+<body data-theme="dark" data-lang="en">
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="hub-shell">
+    <!-- Top Language & Theme Bar -->
+    <header class="hub-topbar">
+      <div class="lang-switcher" role="group" aria-label="Language Switcher">
+        <button class="lang-pill is-active" type="button" data-set-lang="en">EN</button>
+        <button class="lang-pill" type="button" data-set-lang="de">DE</button>
+        <button class="lang-pill" type="button" data-set-lang="ar">&#1593;&#1585;&#1576;&#1610;</button>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" data-en="DARK / LIGHT" data-de="DARK / LIGHT" data-ar="المظهر">DARK / LIGHT</button>
+    </header>
+
+    <!-- Profile Identity -->
+    <section class="profile-header">
+      <div class="avatar-ring-wrap">
+        <svg class="avatar-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4" />
+        </svg>
+        <img class="avatar-img" src="assets/thumbs/avatar.jpg" alt="Ahmed Bayour (@bayoxr)" />
+        <span class="status-dot" title="Active"></span>
+      </div>
+      <h1 class="profile-name">Ahmed Bayour</h1>
+      <span class="profile-handle">@BAYOXR &middot; &#1571;&#1581;&#1605;&#1583; &#1576;&#1610;&#1608;&#1585;</span>
+      <p class="profile-roles" data-en="Filmmaker &middot; Computer Scientist &middot; Media Designer" data-de="Filmmaker &middot; Informatiker &middot; Mediendesigner" data-ar="صانع أفلام &middot; عالم حاسوب &middot; مصمم إعلامي">
+        Filmmaker &middot; Computer Scientist &middot; Media Designer
+      </p>
+      <div class="profile-quote">&ldquo;I don&rsquo;t just film, I feel.&rdquo; &middot; 24fps</div>
+    </section>
+
+    <!-- PRIMARY CTA: Button with Custom BAYOXR Logo to Main Website -->
+    <a class="main-site-card" href="index.html">
+      <div class="main-site-left">
+        <div class="logo-badge" aria-hidden="true">
+          <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="2.2" />
+            <polygon points="20,7 31,14 31,26 20,33 9,26 9,14" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <circle cx="20" cy="20" r="3.2" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="main-site-text">
+          <h2 data-en="BAYOXR — Main Website" data-de="BAYOXR — Haupt-Website" data-ar="الموقع الرئيسي — BAYOXR">BAYOXR — Main Website</h2>
+          <p data-en="Full Portfolio, Showreel &amp; Interactive Lab" data-de="komplettes Portfolio, Showreel &amp; CS Lab" data-ar="المعرض الكامل، الأفلام ومختبر البرمجة">Full Portfolio, Showreel &amp; Interactive Lab</p>
+        </div>
+      </div>
+      <span class="main-site-arrow">&#8599;</span>
+    </a>
+
+    <!-- ALL SOCIAL MEDIA & GITHUB LINKS -->
+    <nav class="links-stack" aria-label="Social Media and GitHub Links">
+      <!-- YouTube -->
+      <a class="link-card" href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener">
+        <div class="link-left">
+          <div class="link-icon" style="color:#ff5121;">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">YouTube</div>
+            <div class="link-sub" data-en="@bayoxr &middot; Short Films, Docs &amp; Vlogs" data-de="@bayoxr &middot; Kurzfilme, Dokus &amp; Vlogs" data-ar="@bayoxr &middot; أفلام قصيرة ووثائقيات">@bayoxr &middot; Short Films, Docs &amp; Vlogs</div>
+          </div>
+        </div>
+        <span class="link-badge">1.42K+ &#8599;</span>
+      </a>
+
+      <!-- Instagram -->
+      <a class="link-card" href="https://www.instagram.com/bayoxr" target="_blank" rel="noopener">
+        <div class="link-left">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4a3.9 3.9 0 0 1-2.3-2.3c-.2-.4-.4-1.1-.4-2.2-.1-1.3-.1-1.6-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4 1.3-.1 1.6-.1 4.9-.1zM12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4A6 6 0 0 0 .6 4.1C.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.2 2.2.6 2.9.3.8.7 1.5 1.4 2.2.7.7 1.3 1.1 2.2 1.4.8.3 1.6.5 2.9.6 1.2.1 1.6.1 4.8.1s3.7 0 4.9-.1c1.3-.1 2.2-.2 2.9-.6.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.3 1.4-2.2.3-.8.5-1.6.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.2-2.2-.6-2.9-.3-.8-.7-1.5-1.4-2.2A6 6 0 0 0 19.9.6C19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">Instagram</div>
+            <div class="link-sub" data-en="@bayoxr &middot; Reels, Visuals &amp; Behind the Scenes" data-de="@bayoxr &middot; Reels, Visuals &amp; Behind the Scenes" data-ar="@bayoxr &middot; ريلز ويوميات بصرية">@bayoxr &middot; Reels, Visuals &amp; Behind the Scenes</div>
+          </div>
+        </div>
+        <span class="link-badge">@bayoxr &#8599;</span>
+      </a>
+
+      <!-- TikTok -->
+      <a class="link-card" href="https://www.tiktok.com/@bayoxr" target="_blank" rel="noopener">
+        <div class="link-left">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 0 1-3-4.3V2h-3.4v13.7a2.9 2.9 0 0 1-5.8 0 2.9 2.9 0 0 1 3.8-2.7V9.5a6.3 6.3 0 1 0 5.4 6.2V9.3a8.1 8.1 0 0 0 4.7 1.5V7.4c-.6 0-1.2-.3-1.7-.7z"/></svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">TikTok</div>
+            <div class="link-sub" data-en="@bayoxr &middot; Short-Form Cinema &amp; Clips" data-de="@bayoxr &middot; Short-Form Cinema &amp; Clips" data-ar="@bayoxr &middot; مقاطع سينمائية قصيرة">@bayoxr &middot; Short-Form Cinema &amp; Clips</div>
+          </div>
+        </div>
+        <span class="link-badge">@bayoxr &#8599;</span>
+      </a>
+
+      <!-- GitHub Profile -->
+      <a class="link-card mint-accent" href="https://github.com/bayoxr" target="_blank" rel="noopener">
+        <div class="link-left">
+          <div class="link-icon" style="color:var(--mint);">
+            <svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">GitHub</div>
+            <div class="link-sub" data-en="github.com/bayoxr &middot; Computer Science &amp; Code" data-de="github.com/bayoxr &middot; Informatik &amp; Code" data-ar="github.com/bayoxr &middot; علوم الحاسوب والبرمجة">github.com/bayoxr &middot; Computer Science &amp; Code</div>
+          </div>
+        </div>
+        <span class="link-badge">Code &#8599;</span>
+      </a>
+
+      <!-- Museo Flagship Open Source Repo -->
+      <a class="link-card mint-accent" href="https://github.com/bayoxr/museo" target="_blank" rel="noopener">
+        <div class="link-left">
+          <div class="link-icon" style="color:#fbbf24;font-family:var(--font-mono);font-weight:700;font-size:13px;">
+            Mu
+          </div>
+          <div class="link-info">
+            <div class="link-title">Museo &mdash; Open Source</div>
+            <div class="link-sub" data-en="bayoxr/museo &middot; Visual Workspace for Creative Projects" data-de="bayoxr/museo &middot; Visueller Workspace für Kreativprojekte" data-ar="bayoxr/museo &middot; مساحة عمل بصرية للمشاريع الإبداعية">bayoxr/museo &middot; Visual Workspace for Creative Projects</div>
+          </div>
+        </div>
+        <span class="link-badge">Repo &#8599;</span>
+      </a>
+    </nav>
+
+    <!-- Featured YouTube Video Card -->
+    <section class="video-spotlight" aria-label="Featured Film">
+      <div class="video-spotlight-top">
+        <span data-en="FEATURED FILM // YOUTUBE" data-de="FEATURED FILM // YOUTUBE" data-ar="فلم مختار // يوتيوب">FEATURED FILM // YOUTUBE</span>
+        <span>13:06 &middot; 4K</span>
+      </div>
+      <div id="videoMount">
+        <button class="video-thumb-btn" id="playFeaturedBtn" type="button" aria-label="Play Featured Video">
+          <img src="assets/thumbs/NxxHqwq5Yxw.jpg" alt="Magical Hangzhou at Night" />
+          <div class="video-play-badge">
+            <span class="video-play-circle">&#9654;</span>
+          </div>
+        </button>
+      </div>
+      <div class="video-caption">
+        <span data-en="Magical Hangzhou at Night" data-de="Magisches Hangzhou bei Nacht" data-ar="الحقيقة الصادمة عن مدن الصين في الليل… هانجو الخيالية!">Magical Hangzhou at Night</span>
+        <a href="https://www.youtube.com/watch?v=NxxHqwq5Yxw" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:11px;color:var(--vermilion);">YouTube &#8599;</a>
+      </div>
+    </section>
+
+    <!-- Footer Share / Copy -->
+    <footer class="hub-footer">
+      <button class="copy-pill" id="copyBioLinkBtn" type="button" data-en="Copy Page Link (@bayoxr)" data-de="Link kopieren (@bayoxr)" data-ar="نسخ رابط الصفحة (@bayoxr)">
+        Copy Page Link (@bayoxr)
+      </button>
+      <div class="hub-copyright">&copy; 2026 AHMED BAYOUR (@BAYOXR)</div>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+      const params = new URLSearchParams(window.location.search);
+      const qLang = params.get("lang");
+      let saved = null;
+      try { saved = localStorage.getItem("bayoxr_lang"); } catch (_) {}
+      let currentLang = (qLang && ["en", "de", "ar"].includes(qLang))
+        ? qLang
+        : (saved && ["en", "de", "ar"].includes(saved)) ? saved : "en";
+
+      function setLang(lang) {
+        if (!["en", "de", "ar"].includes(lang)) lang = "en";
+        currentLang = lang;
+        document.body.dataset.lang = lang;
+        document.documentElement.lang = lang;
+        try { localStorage.setItem("bayoxr_lang", lang); } catch (_) {}
+
+        $$("[data-set-lang]").forEach((b) => {
+          b.classList.toggle("is-active", b.getAttribute("data-set-lang") === lang);
+        });
+        $$("[data-en]").forEach((el) => {
+          const val = el.getAttribute(`data-${lang}`) || el.getAttribute("data-en");
+          if (val !== null) el.innerHTML = val;
+        });
+      }
+
+      $$("[data-set-lang]").forEach((btn) => {
+        btn.addEventListener("click", () => setLang(btn.getAttribute("data-set-lang")));
+      });
+      setLang(currentLang);
+
+      const themeBtn = document.getElementById("themeBtn");
+      if (themeBtn) {
+        themeBtn.addEventListener("click", () => {
+          document.body.dataset.theme = document.body.dataset.theme === "dark" ? "light" : "dark";
+        });
+      }
+
+      const playBtn = document.getElementById("playFeaturedBtn");
+      const videoMount = document.getElementById("videoMount");
+      if (playBtn && videoMount) {
+        playBtn.addEventListener("click", () => {
+          videoMount.innerHTML = '<div style="aspect-ratio:16/9;width:100%;background:#000;"><iframe src="https://www.youtube-nocookie.com/embed/NxxHqwq5Yxw?autoplay=1&rel=0" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+        });
+      }
+
+      const copyBtn = document.getElementById("copyBioLinkBtn");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          try { await navigator.clipboard.writeText(window.location.href); } catch (_) {}
+          const prev = copyBtn.innerHTML;
+          copyBtn.textContent = currentLang === "ar" ? "✓ تم نسخ الرابط!" : currentLang === "de" ? "✓ Link kopiert!" : "✓ Link copied!";
+          setTimeout(() => { copyBtn.innerHTML = prev; }, 2000);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

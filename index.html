@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed Bayour (@bayoxr) — Filmmaker · Computer Scientist · Media Designer</title>
+  <meta name="description" content="Ahmed Bayour (@bayoxr) — Syrian-German Filmmaker, Computer Scientist & Media Designer based in Germany." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300..700&family=Vazirmatn:wght@300..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="dark" data-lang="en" class="is-loading">
+
+  <!-- Film Grain Overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Rotating SVG Pointer Follower -->
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true">
+    <div class="cursor-follower-bg"></div>
+    <svg class="cursor-ring-svg" viewBox="0 0 200 200">
+      <defs>
+        <path id="cursorCirclePath" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" />
+      </defs>
+      <text>
+        <textPath href="#cursorCirclePath" id="cursorRingText">WATCH FILM · 24FPS CINEMA · PLAY REEL · </textPath>
+      </text>
+    </svg>
+    <span class="cursor-center-icon" id="cursorCenterIcon">&#9654;</span>
+  </div>
+
+  <!-- ========================================================================
+       BAND 0: 35MM FILM LEADER PRELOADER
+       ======================================================================== -->
+  <div class="loader" id="loader" aria-label="Loading studio">
+    <div class="loader-shutter loader-shutter-top"></div>
+    <div class="loader-shutter loader-shutter-bottom"></div>
+    <div class="loader-inner">
+      <div class="loader-top-row">
+        <span>BAYOXR // STUDIO</span>
+        <span>24FPS // 60HZ</span>
+        <button class="loader-skip" id="loaderSkip" type="button" data-en="SKIP [ESC] &rarr;" data-de="ÜBERSPRINGEN [ESC] &rarr;" data-ar="تخطي [ESC] &larr;">SKIP [ESC] &rarr;</button>
+      </div>
+
+      <div class="loader-center">
+        <svg class="loader-aperture" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-dasharray="6 4" />
+          <circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <polygon points="50,16 80,34 80,66 50,84 20,66 20,34" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <line x1="50" y1="6" x2="50" y2="94" stroke="currentColor" stroke-width="0.8" opacity="0.45" />
+          <line x1="6" y1="50" x2="94" y2="50" stroke="currentColor" stroke-width="0.8" opacity="0.45" />
+          <circle cx="50" cy="50" r="5" fill="currentColor" />
+        </svg>
+        <div class="loader-wordmark">AHMED BAYOUR</div>
+        <div class="loader-roles">
+          <span>[01] FILMMAKER</span>
+          <span>&bull;</span>
+          <span>[02] COMPUTER SCIENTIST</span>
+          <span>&bull;</span>
+          <span>[03] MEDIA DESIGNER</span>
+        </div>
+        <div class="loader-cutline">
+          <div class="loader-progress-fill" id="loaderFill"></div>
+        </div>
+        <div class="loader-counter" id="loaderCounter">TC 00:00:00:00</div>
+      </div>
+
+      <div class="loader-bottom-row">
+        <span>I DON&rsquo;T JUST FILM, I FEEL.</span>
+        <span>GERMANY &bull; @BAYOXR</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FIXED SWISS GRID TOPBAR
+       ======================================================================== -->
+  <header class="topbar" id="topbar">
+    <a class="brand-block" href="#top" aria-label="Ahmed Bayour Home">
+      <svg class="brand-aperture" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="2.2" />
+        <polygon points="20,7 31,14 31,26 20,33 9,26 9,14" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <circle cx="20" cy="20" r="3" fill="currentColor" />
+      </svg>
+      <span>BAYOXR</span>
+    </a>
+
+    <nav class="topnav" aria-label="Primary Navigation">
+      <a href="#showreel"><span class="nav-idx">01</span><span data-en="Showreel" data-de="Showreel" data-ar="العرض السينمائي">Showreel</span></a>
+      <a href="#disciplines"><span class="nav-idx">02</span><span data-en="Disciplines" data-de="Disziplinen" data-ar="التخصصات">Disciplines</span></a>
+      <a href="#films"><span class="nav-idx">03</span><span data-en="Films" data-de="Filme" data-ar="الأفلام">Films</span></a>
+      <a href="#lab"><span class="nav-idx">04</span><span data-en="CS Lab" data-de="CS Lab" data-ar="مختبر البرمجة">CS Lab</span></a>
+      <a href="#story"><span class="nav-idx">05</span><span data-en="About &amp; Stack" data-de="Über &amp; Stack" data-ar="عني والتقنيات">About &amp; Stack</span></a>
+      <a href="links.html"><span class="nav-idx">&bull;</span><span data-en="All Links" data-de="Alle Links" data-ar="جميع الروابط">All Links</span></a>
+    </nav>
+
+    <div class="topbar-right">
+      <div class="timecode-pill" aria-label="Live SMPTE Timecode">
+        <span class="rec-dot"></span>
+        <span id="liveTimecode">TC 01:24:00:00</span>
+      </div>
+
+      <button class="ctrl-btn" id="audioToggle" type="button" aria-label="Toggle UI Sound Synth" title="UI Sound">
+        <span class="audio-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="audioLabel">SFX</span>
+      </button>
+
+      <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Switch Language EN / DE / AR">
+        <button class="lang-pill is-active" type="button" data-set-lang="en">EN</button>
+        <button class="lang-pill" type="button" data-set-lang="de">DE</button>
+        <button class="lang-pill" type="button" data-set-lang="ar">&#1593;&#1585;&#1576;&#1610;</button>
+      </div>
+
+      <button class="ctrl-btn" id="themeToggle" type="button" aria-label="Toggle Theme">
+        <span id="themeLabel" data-en="DARKROOM" data-de="DARKROOM" data-ar="الوضع الداكن">DARKROOM</span>
+      </button>
+
+      <a class="contact-cell" href="#contact">
+        <span data-en="Connect" data-de="Kontakt" data-ar="تواصل">Connect</span>
+        <span class="arr">&#8599;</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ======================================================================
+         BAND 1: ASYMMETRIC SWISS HERO BENTO GRID
+         ====================================================================== -->
+    <section class="hero-grid" aria-label="Hero">
+      <!-- Cell 1: Main Identity & Interactive Tri-Role Switcher -->
+      <div class="cell cell-brand">
+        <div class="hero-status-row">
+          <div class="status-badge">
+            <span class="kicker-dot"></span>
+            <span data-en="FILMMAKER &middot; COMPUTER SCIENTIST &middot; MEDIA DESIGNER" data-de="FILMMAKER &middot; INFORMATIKER &middot; MEDIENDESIGNER" data-ar="صانع أفلام &middot; عالم حاسوب &middot; مصمم إعلامي">FILMMAKER &middot; COMPUTER SCIENTIST &middot; MEDIA DESIGNER</span>
+          </div>
+          <span class="arabic-tag" aria-label="Ahmed Bayour in Arabic">&#1571;&#1581;&#1605;&#1583; &#1576;&#1610;&#1608;&#1585; &middot; @bayoxr</span>
+        </div>
+
+        <div class="hero-headline-wrap">
+          <h1 class="giant-name">
+            AHMED<br />
+            BAY<span class="serif-accent">O</span>UR
+          </h1>
+          <p class="hero-tagline" data-en="Where <em>24fps Cinema</em> meets <em>Computer Science</em> and <em>Media Design</em>. &ldquo;I don&rsquo;t just film, I feel.&rdquo;" data-de="Wo <em>24fps Kino</em> auf <em>Informatik</em> und <em>Mediendesign</em> trifft. &bdquo;I don&rsquo;t just film, I feel.&ldquo;" data-ar="حيث تلتقي <em>سينما 24 إطاراً</em> مع <em>علوم الحاسوب</em> و<em>التصميم الإعلامي</em>. &laquo;أنا لا أصوّر فقط، بل أشعر.&raquo;">
+            Where <em>24fps Cinema</em> meets <em>Computer Science</em> and <em>Media Design</em>. &ldquo;I don&rsquo;t just film, I feel.&rdquo;
+          </p>
+        </div>
+
+        <div>
+          <div class="role-switcher" role="tablist">
+            <button class="role-pill is-active" type="button" data-role="film">
+              <span class="rp-num">01</span>
+              <span data-en="Filmmaker" data-de="Filmmaker" data-ar="صانع أفلام">Filmmaker</span>
+            </button>
+            <button class="role-pill" type="button" data-role="cs">
+              <span class="rp-num">02</span>
+              <span data-en="Computer Scientist" data-de="Informatiker" data-ar="عالم حاسوب">Computer Scientist</span>
+            </button>
+            <button class="role-pill" type="button" data-role="design">
+              <span class="rp-num">03</span>
+              <span data-en="Media Designer" data-de="Mediendesigner" data-ar="مصمم إعلامي">Media Designer</span>
+            </button>
+          </div>
+          <p class="role-dynamic-desc" id="roleDynamicDesc">
+            &gt; 48+ films &amp; visual stories on YouTube (@bayoxr) — directing, cinematography &amp; editing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cell 2: Interactive Halftone Canvas + Portrait Dossier -->
+      <div class="cell cell-grain grain-tr" data-dither-cell>
+        <article class="portrait-dossier" id="portraitCard">
+          <div class="portrait-frame">
+            <img src="assets/thumbs/avatar.jpg" alt="Ahmed Bayour (@bayoxr) Portrait" width="320" height="320" />
+            <div class="portrait-corner"></div>
+          </div>
+          <div class="dossier-meta">
+            <span class="dossier-handle">@BAYOXR</span>
+            <h2 class="dossier-title" data-en="Syrian-German Media &amp; CS Student" data-de="Syrisch-Deutscher Medien- &amp; Informatikstudent" data-ar="طالب إعلام وعلوم حاسوب سوري-ألماني">Syrian-German Media &amp; CS Student</h2>
+            <p class="dossier-quote" data-en="&ldquo;I don&rsquo;t just film, I feel. Creating visions, one frame at a time.&rdquo;" data-de="&bdquo;I don&rsquo;t just film, I feel. Creating visions, one frame at a time.&ldquo;" data-ar="&laquo;أنا لا أصوّر فقط، بل أشعر. أصنع الرؤى إطاراً تلو الآخر.&raquo;">&ldquo;I don&rsquo;t just film, I feel. Creating visions, one frame at a time.&rdquo;</p>
+            <div class="dossier-coords">
+              <span class="coord-chip" data-en="GERMANY &#127465;&#127466;" data-de="DEUTSCHLAND &#127465;&#127466;" data-ar="ألمانيا &#127465;&#127466;">GERMANY &#127465;&#127466;</span>
+              <a class="coord-chip" href="https://github.com/bayoxr" target="_blank" rel="noopener" style="border-color:rgba(184,240,208,0.45);color:var(--mint);">GITHUB &#8599;</a>
+              <a class="coord-chip" href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener" style="border-color:rgba(255,81,33,0.45);color:var(--vermilion);">YOUTUBE &#8599;</a>
+              <a class="coord-chip" href="links.html" style="border-color:rgba(255,255,255,0.35);color:#fff;" data-en="ALL LINKS &#8599;" data-de="ALLE LINKS &#8599;" data-ar="جميع الروابط &#8599;">ALL LINKS &#8599;</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Cell 3: Bottom-Left Primary CTAs -->
+      <div class="cell cell-grain grain-bl" data-dither-cell>
+        <div class="optical-hud">
+          <div class="optical-specs">
+            <div><span data-en="CINEMA" data-de="KINO" data-ar="السينما">CINEMA</span><strong>24 FPS &middot; 4K</strong></div>
+            <div><span data-en="CODE" data-de="CODE" data-ar="البرمجة">CODE</span><strong>JAVA &middot; C/C++ &middot; C# &middot; JS</strong></div>
+            <div><span data-en="DESIGN" data-de="DESIGN" data-ar="التصميم">DESIGN</span><strong>FIGMA &middot; ADOBE CC</strong></div>
+          </div>
+        </div>
+        <div class="optical-bottom">
+          <div class="hero-cta-group">
+            <a class="btn-primary" href="#showreel">
+              <span>&#9654;</span>
+              <span data-en="Watch Showreel" data-de="Showreel ansehen" data-ar="مشاهدة العرض">Watch Showreel</span>
+            </a>
+            <a class="btn-ghost" href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener">
+              <span>YouTube @bayoxr</span>
+              <span>&#8599;</span>
+            </a>
+            <a class="btn-ghost" href="https://github.com/bayoxr" target="_blank" rel="noopener">
+              <span>GitHub @bayoxr</span>
+              <span>&#8599;</span>
+            </a>
+            <a class="btn-ghost" href="links.html">
+              <span data-en="Social Links" data-de="Social Links" data-ar="روابط التواصل">Social Links</span>
+              <span>&#8599;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cell 4: Short Manifesto Claim -->
+      <div class="cell cell-claim">
+        <p data-en="As a Computer Scientist I build the systems; as a Media Designer I shape the interface; as a Filmmaker I give them a soul." data-de="Als Informatiker baue ich die Systeme; als Mediendesigner forme ich die Oberfläche; als Filmmaker gebe ich ihnen eine Seele." data-ar="كمهندس حاسوب أبني الأنظمة؛ وكمصمم إعلامي أشكل الواجهة؛ وكصانع أفلام أمنحها روحاً.">
+          As a Computer Scientist I build the systems; as a Media Designer I shape the interface; as a Filmmaker I give them a soul.
+        </p>
+        <a class="claim-cta" href="#disciplines">
+          <span data-en="Explore 3 Disciplines" data-de="3 Disziplinen entdecken" data-ar="اكتشف التخصصات الثلاثة">Explore 3 Disciplines</span>
+          <span class="arr">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Cell 5: Mint Live Ticker Cell -->
+      <div class="cell cell-mint">
+        <p data-en="Films, software, and visual design crafted with precision." data-de="Filme, Software und Mediendesign mit Präzision gestaltet." data-ar="أفلام، برمجيات وتصميم بصري بدقة عالية.">
+          Films, software, and visual design crafted with precision.
+        </p>
+        <div>
+          <p class="news-label" data-en="Featured Works:" data-de="Aktuelle Werke:" data-ar="أبرز الأعمال:">Featured Works:</p>
+          <p class="ticker-value" id="heroTicker">Magical Hangzhou at Night (4K)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         KINETIC TYPOGRAPHY TRANSITION STRIP
+         ====================================================================== -->
+    <section class="kinetic-strip" aria-hidden="true">
+      <h2 class="strip-word-1" data-slide data-en="24FPS EMOTION." data-de="24FPS EMOTION." data-ar="شعور بـ 24 إطاراً.">24FPS EMOTION.</h2>
+      <div class="strip-word-2-wrap">
+        <span class="strip-word-2" data-slide>60HZ <em>Architecture.</em></span>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 1B: ANAMORPHIC 2.39:1 SHOWREEL VIEWFINDER STAGE
+         ====================================================================== -->
+    <section class="showreel-section" id="showreel">
+      <div class="showreel-header">
+        <div>
+          <span class="kicker-tag"><span class="kicker-dot"></span><span data-en="01 // FEATURED SHOWREEL" data-de="01 // FEATURED SHOWREEL" data-ar="01 // العرض السينمائي">01 // FEATURED SHOWREEL</span></span>
+          <h2 class="section-Display" style="margin-top: 10px;" data-en="Life in 24fps" data-de="Life in 24fps" data-ar="الحياة بـ 24 إطاراً">Life in 24fps</h2>
+        </div>
+
+        <div class="viewfinder-controls">
+          <div class="vf-group" role="group" aria-label="Aspect Ratio Gate">
+            <span class="vf-group-label" data-en="RATIO:" data-de="FORMAT:" data-ar="الأبعاد:">RATIO:</span>
+            <button class="vf-chip is-active" type="button" data-aspect-btn="2.39:1">2.39:1</button>
+            <button class="vf-chip" type="button" data-aspect-btn="16:9">16:9</button>
+            <button class="vf-chip" type="button" data-aspect-btn="4:3">4:3</button>
+          </div>
+          <div class="vf-group" role="group" aria-label="Color Grade">
+            <span class="vf-group-label" data-en="LOOK:" data-de="LOOK:" data-ar="اللون:">LOOK:</span>
+            <button class="vf-chip is-active" type="button" data-lut-btn="kodak">WARM FILM</button>
+            <button class="vf-chip" type="button" data-lut-btn="hangzhou">NIGHT NEON</button>
+            <button class="vf-chip" type="button" data-lut-btn="noir">MONO B&amp;W</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="viewfinder-stage-wrap">
+        <div class="viewfinder-gate" id="viewfinderGate" data-aspect="2.39:1" data-lut="kodak" data-cursor-ring="WATCH REEL · 24FPS ·">
+          <div class="viewfinder-media">
+            <img class="viewfinder-backdrop" id="vfBackdrop" src="assets/thumbs/NxxHqwq5Yxw.jpg" alt="Magical Hangzhou at Night" />
+            <canvas class="viewfinder-shader-canvas" id="vfShaderCanvas"></canvas>
+          </div>
+
+          <!-- Inline YouTube Embed Container (activated on Play) -->
+          <div class="viewfinder-embed-container" id="vfEmbedContainer">
+            <button class="close-inline-video" id="vfCloseInline" type="button">&times; <span data-en="Close Player" data-de="Player schließen" data-ar="إغلاق المشغل">Close Player</span></button>
+            <div id="vfIframeMount" style="width:100%;height:100%;"></div>
+          </div>
+
+          <div class="vf-guides" aria-hidden="true">
+            <div class="vf-center-cross"></div>
+          </div>
+
+          <div class="vf-hud">
+            <div class="vf-top-bar">
+              <span>REC <strong style="color:var(--vermilion);">&#9679;</strong> 24 FPS</span>
+              <span id="vfActiveMeta">REEL 01 // 13:06</span>
+              <span>@BAYOXR</span>
+            </div>
+
+            <div class="vf-center-cta">
+              <span class="caps" style="color: var(--mint);" id="vfActiveKicker" data-en="FEATURED FILM // @BAYOXR" data-de="FEATURED FILM // @BAYOXR" data-ar="فلم مختار // @BAYOXR">FEATURED FILM // @BAYOXR</span>
+              <h3 class="vf-Active-title" id="vfActiveTitle" data-en="The Shocking Truth About China&rsquo;s Cities at Night&hellip; Magical Hangzhou!" data-de="Die Wahrheit über Chinas Städte bei Nacht&hellip; Magisches Hangzhou!" data-ar="الحقيقة الصادمة عن مدن الصين في الليل… هانجو الخيالية!">The Shocking Truth About China&rsquo;s Cities at Night&hellip; Magical Hangzhou!</h3>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <button class="vf-play-btn" id="vfPlayInlineBtn" type="button" data-vid="NxxHqwq5Yxw">
+                  <span>&#9654;</span>
+                  <span data-en="Play Here" data-de="Hier abspielen" data-ar="تشغيل الآن">Play Here</span>
+                </button>
+                <a class="btn-ghost" id="vfYoutubeLink" href="https://www.youtube.com/watch?v=NxxHqwq5Yxw" target="_blank" rel="noopener" style="background:rgba(0,0,0,0.65);color:#fff;">
+                  <span data-en="YouTube" data-de="YouTube" data-ar="يوتيوب">YouTube</span>
+                  <span>&#8599;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="vf-bottom-bar">
+              <span>@BAYOXR CINEMA</span>
+              <span data-en="SELECT A REEL BELOW" data-de="WÄHLE UNTEN EINEN FILM" data-ar="اختر فلماً بالأسفل">SELECT A REEL BELOW</span>
+              <span>4K UHD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Reel Selector Strip -->
+      <div class="reel-selector-strip">
+        <button class="reel-tab is-active" type="button"
+          data-vid="NxxHqwq5Yxw"
+          data-thumb="assets/thumbs/NxxHqwq5Yxw.jpg"
+          data-kicker="01 // DOCUMENTARY · 13:06"
+          data-title="The Shocking Truth About China's Cities at Night… Magical Hangzhou!"
+          data-title-de="Die Wahrheit über Chinas Städte bei Nacht… Magisches Hangzhou!"
+          data-title-ar="الحقيقة الصادمة عن مدن الصين في الليل… هانجو الخيالية!"
+          data-meta="REEL 01 // 13:06">
+          <img src="assets/thumbs/NxxHqwq5Yxw.jpg" alt="Hangzhou Night" />
+          <div class="reel-tab-info">
+            <div class="reel-tab-idx">01 &middot; 13:06</div>
+            <div class="reel-tab-title" data-en="Magical Hangzhou at Night" data-de="Magisches Hangzhou bei Nacht" data-ar="هانجو الخيالية في الليل">Magical Hangzhou at Night</div>
+          </div>
+        </button>
+
+        <button class="reel-tab" type="button"
+          data-vid="kqXdaYvlxCs"
+          data-thumb="assets/thumbs/kqXdaYvlxCs.jpg"
+          data-kicker="02 // SHORT FILM · 02:30"
+          data-title="AGAIN — Narrative Short Film"
+          data-title-de="AGAIN — Narrativer Kurzfilm"
+          data-title-ar="AGAIN — فلم قصير"
+          data-meta="REEL 02 // 02:30">
+          <img src="assets/thumbs/kqXdaYvlxCs.jpg" alt="AGAIN Short Film" />
+          <div class="reel-tab-info">
+            <div class="reel-tab-idx">02 &middot; 02:30</div>
+            <div class="reel-tab-title" data-en="AGAIN &mdash; Short Film" data-de="AGAIN &mdash; Kurzfilm" data-ar="AGAIN &mdash; فلم قصير">AGAIN &mdash; Short Film</div>
+          </div>
+        </button>
+
+        <button class="reel-tab" type="button"
+          data-vid="GFMrYnryZNs"
+          data-thumb="assets/thumbs/GFMrYnryZNs.jpg"
+          data-kicker="03 // DOCUMENTARY · 07:49"
+          data-title="My First 48 Hours in China"
+          data-title-de="Meine ersten 48 Stunden in China"
+          data-title-ar="أول 48 ساعة في الصين"
+          data-meta="REEL 03 // 07:49">
+          <img src="assets/thumbs/GFMrYnryZNs.jpg" alt="First 48 Hours in China" />
+          <div class="reel-tab-info">
+            <div class="reel-tab-idx">03 &middot; 07:49</div>
+            <div class="reel-tab-title" data-en="First 48 Hours in China" data-de="Erste 48 Stunden in China" data-ar="أول 48 ساعة في الصين">First 48 Hours in China</div>
+          </div>
+        </button>
+
+        <button class="reel-tab" type="button"
+          data-vid="OZret3KxcOw"
+          data-thumb="assets/thumbs/OZret3KxcOw.jpg"
+          data-kicker="04 // BEHIND THE SCENES · 08:53"
+          data-title="How I Shot My Short Film From My Room"
+          data-title-de="Wie ich meinen Kurzfilm im Zimmer gedreht habe"
+          data-title-ar="كيف صورت فلمي القصير من غرفتي؟"
+          data-meta="REEL 04 // 08:53">
+          <img src="assets/thumbs/OZret3KxcOw.jpg" alt="How I Shot My Short Film" />
+          <div class="reel-tab-info">
+            <div class="reel-tab-idx">04 &middot; 08:53</div>
+            <div class="reel-tab-title" data-en="How I Shot My Short Film" data-de="Kurzfilm im eigenen Zimmer" data-ar="كيف صورت فلمي القصير من غرفتي؟">How I Shot My Short Film</div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 2: TRI-CORE DISCIPLINES — HORIZONTAL PIN PASSAGE
+         ====================================================================== -->
+    <section class="disciplines-section" id="disciplines">
+      <div class="disc-header">
+        <div>
+          <span class="kicker-tag"><span class="kicker-dot mint"></span><span data-en="02 // THREE DISCIPLINES" data-de="02 // DREI DISZIPLINEN" data-ar="02 // التخصصات الثلاثة">02 // THREE DISCIPLINES</span></span>
+          <h2 class="section-Display" style="margin-top: 10px;" data-slide data-en="Three Worlds. One Signature." data-de="Drei Welten. Eine Handschrift." data-ar="ثلاثة عوالم. بصمة واحدة.">Three Worlds. One Signature.</h2>
+        </div>
+        <div class="disc-progress-wrap">
+          <span id="discStepLabel">01 / 04</span>
+          <div class="disc-progress-bar"><div class="disc-progress-fill" id="discProgressFill"></div></div>
+          <span data-en="SCROLL &rarr;" data-de="SCROLLEN &rarr;" data-ar="مرّر &larr;">SCROLL &rarr;</span>
+        </div>
+      </div>
+
+      <div class="hwrap" id="hwrap">
+        <div class="htrack" id="htrack">
+          <!-- Panel 01: Filmmaker -->
+          <article class="dpanel dpanel-1">
+            <div class="dpanel-top">
+              <span class="dpanel-num">01</span>
+              <span class="dpanel-badge" data-en="FILMMAKER &middot; 24 FPS" data-de="FILMMAKER &middot; 24 FPS" data-ar="صانع أفلام &middot; 24 إطاراً">FILMMAKER &middot; 24 FPS</span>
+            </div>
+            <div class="dpanel-body">
+              <div>
+                <h3 data-en="Filmmaking &amp; Visual Storytelling" data-de="Filmmaking &amp; Storytelling" data-ar="صناعة الأفلام والسرد البصري">Filmmaking &amp; Visual Storytelling</h3>
+                <p class="dpanel-lead" data-en="Short films, documentaries, and visual essays on @bayoxr — from directing and camera work to editing and motion." data-de="Kurzfilme, Dokumentationen und visuelle Essays auf @bayoxr — von Regie und Kamera bis zu Schnitt und Motion." data-ar="أفلام قصيرة، وثائقيات ومقالات بصرية على قناة @bayoxr — من الإخراج والتصوير إلى المونتاج.">
+                  Short films, documentaries, and visual essays on @bayoxr — from directing and camera work to editing and motion.
+                </p>
+                <ul class="dlist">
+                  <li><span data-en="Directing &amp; Storytelling" data-de="Regie &amp; Storytelling" data-ar="الإخراج والسرد القصصي">Directing &amp; Storytelling</span><span>SHORT FILM / DOC</span></li>
+                  <li><span data-en="Cinematography &amp; Lighting" data-de="Kamera &amp; Lichtsetzung" data-ar="التصوير السينمائي والإضاءة">Cinematography &amp; Lighting</span><span>24 FPS</span></li>
+                  <li><span data-en="Editing &amp; Visual Effects" data-de="Schnitt &amp; Visual Effects" data-ar="المونتاج والمؤثرات البصرية">Editing &amp; Visual Effects</span><span>PREMIERE PRO &middot; AE</span></li>
+                  <li><span data-en="Sound Design &amp; Pacing" data-de="Sounddesign &amp; Rhythmus" data-ar="تصميم الصوت والإيقاع">Sound Design &amp; Pacing</span><span>AUDIO &amp; CUT</span></li>
+                </ul>
+              </div>
+
+              <!-- Interactive Optical Lens Simulator -->
+              <div class="dpanel-widget">
+                <div class="widget-header">
+                  <span data-en="FOCAL LENGTH PREVIEW" data-de="BRENNWEITEN-VORSCHAU" data-ar="معاينة البعد البؤري للعدسة">FOCAL LENGTH PREVIEW</span>
+                  <span id="lensReadout">35mm f/1.4</span>
+                </div>
+                <div class="lens-preview-box">
+                  <img id="lensPreviewImg" src="assets/thumbs/0tnVRjdPmsw.jpg" alt="Optical Focal Preview" />
+                </div>
+                <div class="lens-buttons">
+                  <button class="lens-btn" type="button" data-lens="16" data-scale="1.0" data-blur="0px">16mm</button>
+                  <button class="lens-btn is-active" type="button" data-lens="35" data-scale="1.18" data-blur="0px">35mm</button>
+                  <button class="lens-btn" type="button" data-lens="50" data-scale="1.38" data-blur="0.3px">50mm</button>
+                  <button class="lens-btn" type="button" data-lens="85" data-scale="1.65" data-blur="0.6px">85mm</button>
+                </div>
+              </div>
+            </div>
+            <div class="caps" style="opacity:0.45;">01 // YOUTUBE @BAYOXR &middot; 48+ VIDEOS</div>
+          </article>
+
+          <!-- Panel 02: Computer Scientist -->
+          <article class="dpanel dpanel-2">
+            <div class="dpanel-top">
+              <span class="dpanel-num">02</span>
+              <span class="dpanel-badge" data-en="COMPUTER SCIENTIST &middot; GITHUB @BAYOXR" data-de="INFORMATIKER &middot; GITHUB @BAYOXR" data-ar="عالم حاسوب &middot; GITHUB @BAYOXR">COMPUTER SCIENTIST &middot; GITHUB @BAYOXR</span>
+            </div>
+            <div class="dpanel-body">
+              <div>
+                <h3 data-en="Computer Science &amp; Software Engineering" data-de="Informatik &amp; Software-Entwicklung" data-ar="علوم الحاسوب وهندسة البرمجيات">Computer Science &amp; Software Engineering</h3>
+                <p class="dpanel-lead" data-en="Solid Computer Science foundation in object-oriented and systems programming, web engineering, and open-source tools like Museo (bayoxr/museo)." data-de="Fundierte Informatik in objektorientierter und systemnaher Programmierung, Web-Entwicklung und Open-Source-Projekten wie Museo (bayoxr/museo)." data-ar="أساس قوي في علوم الحاسوب والبرمجة الكائنية والأنظمة، وتطوير الويب ومشاريع مفتوحة المصدر مثل Museo.">
+                  Solid Computer Science foundation in object-oriented and systems programming, web engineering, and open-source tools like Museo (bayoxr/museo).
+                </p>
+                <ul class="dlist">
+                  <li><span data-en="Object-Oriented &amp; Systems" data-de="Objektorientiert &amp; Systemnah" data-ar="البرمجة الكائنية والأنظمة">Object-Oriented &amp; Systems</span><span>JAVA &middot; C / C++ &middot; C#</span></li>
+                  <li><span data-en="Web Development" data-de="Web-Entwicklung" data-ar="تطوير الويب">Web Development</span><span>JAVASCRIPT &middot; HTML &middot; CSS</span></li>
+                  <li><span data-en="Databases &amp; Dev Workflow" data-de="Datenbanken &amp; Dev-Workflow" data-ar="قواعد البيانات وأدوات التطوير">Databases &amp; Dev Workflow</span><span>SQL &middot; GIT &middot; LINUX</span></li>
+                  <li><span data-en="Open Source Project" data-de="Open-Source-Projekt" data-ar="مشروع مفتوح المصدر">Open Source Project</span><span>GITHUB: BAYOXR/MUSEO</span></li>
+                </ul>
+              </div>
+
+              <div class="dpanel-widget">
+                <div class="widget-header">
+                  <span>GITHUB // BAYOXR/MUSEO</span>
+                  <a href="https://github.com/bayoxr/museo" target="_blank" rel="noopener" style="color:var(--mint);" data-en="OPEN REPO &#8599;" data-de="REPO ÖFFNEN &#8599;" data-ar="فتح المستودع &#8599;">OPEN REPO &#8599;</a>
+                </div>
+                <div class="gh-code-tabs" role="tablist" aria-label="Museo Repository Files">
+                  <button class="gh-code-tab is-active" type="button" data-gh-file="store">js/store.js</button>
+                  <button class="gh-code-tab" type="button" data-gh-file="swift">MuseoApp.swift</button>
+                  <button class="gh-code-tab" type="button" data-gh-file="python">server.py</button>
+                </div>
+                <pre class="cs-code-box"><code id="ghCodeDisplay"><span class="cm">// github.com/bayoxr/museo — js/store.js</span>
+<span class="kw">export class</span> <span class="fn">Store</span> {
+  <span class="fn">constructor</span>() {
+    <span class="kw">this</span>.zoom = <span class="fn">1</span>; <span class="kw">this</span>.panX = <span class="fn">0</span>; <span class="kw">this</span>.panY = <span class="fn">0</span>;
+    <span class="kw">this</span>.cloudAvailable = <span class="kw">false</span>;
+  }
+  <span class="kw">async</span> <span class="fn">syncToCloud</span>(payload) {
+    <span class="kw">return</span> fetch(<span class="fn">"/api/workspace"</span>, { method: <span class="fn">"POST"</span>, body: payload });
+  }
+}</code></pre>
+              </div>
+            </div>
+            <div class="caps" style="opacity:0.45;">02 // JAVA &middot; C/C++ &middot; C# &middot; JS &middot; HTML/CSS &middot; SQL &middot; GIT &middot; LINUX</div>
+          </article>
+
+          <!-- Panel 03: Media Designer -->
+          <article class="dpanel dpanel-3">
+            <div class="dpanel-top">
+              <span class="dpanel-num">03</span>
+              <span class="dpanel-badge" data-en="MEDIA DESIGNER &middot; VISUAL SYSTEMS" data-de="MEDIENDESIGNER &middot; VISUELLE SYSTEME" data-ar="مصمم إعلامي &middot; أنظمة بصرية">MEDIA DESIGNER &middot; VISUAL SYSTEMS</span>
+            </div>
+            <div class="dpanel-body">
+              <div>
+                <h3 data-en="Media Design &amp; Visual Direction" data-de="Mediendesign &amp; Visuelle Gestaltung" data-ar="التصميم الإعلامي والإخراج البصري">Media Design &amp; Visual Direction</h3>
+                <p class="dpanel-lead" data-en="Clean interfaces, brand identities, and visual assets created with Figma, Photoshop, and Illustrator." data-de="Klare Interfaces, Markenidentitäten und visuelle Welten — gestaltet mit Figma, Photoshop und Illustrator." data-ar="واجهات رقمية واضحة، هويات بصرية وتصاميم إبداعية باستخدام Figma وPhotoshop وIllustrator.">
+                  Clean interfaces, brand identities, and visual assets created with Figma, Photoshop, and Illustrator.
+                </p>
+                <ul class="dlist">
+                  <li><span data-en="UI/UX &amp; Interface Design" data-de="UI/UX &amp; Interface-Design" data-ar="تصميم واجهات وتجربة المستخدم">UI/UX &amp; Interface Design</span><span>FIGMA</span></li>
+                  <li><span data-en="Compositing &amp; Visual Art" data-de="Bildbearbeitung &amp; Compositing" data-ar="معالجة الصور والتركيب البصري">Compositing &amp; Visual Art</span><span>PHOTOSHOP</span></li>
+                  <li><span data-en="Vector Graphics &amp; Branding" data-de="Vektorgrafik &amp; Branding" data-ar="الرسوم المتجهة والهوية البصرية">Vector Graphics &amp; Branding</span><span>ILLUSTRATOR</span></li>
+                  <li><span data-en="Motion Graphics" data-de="Motion Graphics" data-ar="الرسوم المتحركة">Motion Graphics</span><span>AFTER EFFECTS</span></li>
+                </ul>
+              </div>
+
+              <!-- Interactive Variable Type Tester -->
+              <div class="dpanel-widget">
+                <div class="widget-header">
+                  <span data-en="TYPOGRAPHY LAB" data-de="TYPOGRAFIE-LABOR" data-ar="مختبر الطباعة">TYPOGRAPHY LAB</span>
+                  <span id="typeWeightReadout">WEIGHT: 400</span>
+                </div>
+                <div class="type-tester-display" id="typeTesterTarget" data-en="Form follows <em>Emotion</em>." data-de="Form folgt <em>Emotion</em>." data-ar="الشكل يتبع <em>الشعور</em>.">
+                  Form follows <em>Emotion</em>.
+                </div>
+                <div class="type-slider-row">
+                  <span>WEIGHT</span>
+                  <input type="range" id="typeWeightSlider" min="300" max="700" value="400" />
+                </div>
+                <div class="type-slider-row">
+                  <span>TRACKING</span>
+                  <input type="range" id="typeTrackSlider" min="-5" max="15" value="-1" />
+                </div>
+              </div>
+            </div>
+            <div class="caps" style="opacity:0.45;">03 // FIGMA &middot; PHOTOSHOP &middot; ILLUSTRATOR &middot; AFTER EFFECTS</div>
+          </article>
+
+          <!-- Panel 04: The Convergence -->
+          <article class="dpanel dpanel-4">
+            <div class="dpanel-top">
+              <span class="dpanel-num">04</span>
+              <span class="dpanel-badge" data-en="THE INTERSECTION &middot; 3 IN 1" data-de="DIE SCHNITTMENGE &middot; 3 IN 1" data-ar="نقطة الالتقاء &middot; ٣ في ١">THE INTERSECTION &middot; 3 IN 1</span>
+            </div>
+            <div class="dpanel-body">
+              <div>
+                <h3 data-en="Film &times; Code &times; Design" data-de="Film &times; Code &times; Design" data-ar="سينما &times; برمجة &times; تصميم">Film &times; Code &times; Design</h3>
+                <p class="dpanel-lead" data-en="Combining the eye of a filmmaker, the logic of a computer scientist, and the precision of a media designer." data-de="Der Blick eines Filmmakers, die Logik eines Informatikers und die Präzision eines Mediendesigners in einer Person." data-ar="جمع رؤية صانع الأفلام، ومنطق عالم الحاسوب، ودقة المصمم الإعلامي في عمل واحد.">
+                  Combining the eye of a filmmaker, the logic of a computer scientist, and the precision of a media designer.
+                </p>
+                <div style="margin-top:3vh;">
+                  <a class="btn-primary" href="#contact">
+                    <span data-en="Start a Project Together" data-de="Gemeinsam ein Projekt starten" data-ar="لنبدأ مشروعاً معاً">Start a Project Together</span>
+                    <span>&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="dpanel-widget">
+                <div class="widget-header">
+                  <span data-en="SYNERGY" data-de="SYNERGIE" data-ar="التكامل">SYNERGY</span>
+                  <span>3 &times;</span>
+                </div>
+                <div class="triad-diagram">
+                  <div class="triad-node">
+                    <strong>FILMMAKER &times; COMPUTER SCIENTIST</strong>
+                    <p data-en="Technical camera workflows &amp; interactive media." data-de="Technische Kamera-Workflows &amp; interaktive Medien." data-ar="تقنيات التصوير الحديثة والوسائط التفاعلية.">Technical camera workflows &amp; interactive media.</p>
+                  </div>
+                  <div class="triad-node">
+                    <strong>COMPUTER SCIENTIST &times; MEDIA DESIGNER</strong>
+                    <p data-en="Creative software like Museo &amp; modern web interfaces." data-de="Kreativ-Software wie Museo &amp; moderne Web-Interfaces." data-ar="برمجيات إبداعية مثل Museo وواجهات ويب حديثة.">Creative software like Museo &amp; modern web interfaces.</p>
+                  </div>
+                  <div class="triad-node">
+                    <strong>FILMMAKER &times; MEDIA DESIGNER</strong>
+                    <p data-en="Visual storytelling, Premiere/AE motion &amp; strong aesthetics." data-de="Visuelles Storytelling, Premiere/AE Motion &amp; starke Ästhetik." data-ar="سرد بصري، موشن جرافيكس وهوية بصرية قوية.">Visual storytelling, Premiere/AE motion &amp; strong aesthetics.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="caps" style="opacity:0.45;">04 // FILM &times; CODE &times; DESIGN</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 3: SELECTED FILMOGRAPHY & @BAYOXR YOUTUBE ARCHIVE
+         ====================================================================== -->
+    <section class="films-section" id="films">
+      <div class="films-top">
+        <div>
+          <span class="kicker-tag"><span class="kicker-dot"></span><span data-en="03 // YOUTUBE @BAYOXR ARCHIVE" data-de="03 // YOUTUBE @BAYOXR ARCHIV" data-ar="03 // أرشيف يوتيوب @BAYOXR">03 // YOUTUBE @BAYOXR ARCHIVE</span></span>
+          <h2 class="section-Display" style="margin-top: 10px;" data-slide data-en="Selected Films &amp; Videos" data-de="Ausgewählte Filme &amp; Videos" data-ar="أفلام وفيديوهات مختارة">Selected Films &amp; Videos</h2>
+        </div>
+
+        <div class="film-filters" role="tablist" aria-label="Film Categories">
+          <button class="filter-btn is-active" type="button" data-filter="all" data-en="All (10)" data-de="Alle (10)" data-ar="الكل (10)">All (10)</button>
+          <button class="filter-btn" type="button" data-filter="short" data-en="Short Film &amp; Craft" data-de="Kurzfilm &amp; Kamera" data-ar="أفلام قصيرة ومعدات">Short Film &amp; Craft</button>
+          <button class="filter-btn" type="button" data-filter="china" data-en="Documentaries" data-de="Dokus &amp; Reisen" data-ar="وثائقيات وسفر">Documentaries</button>
+          <button class="filter-btn" type="button" data-filter="essay" data-en="Essays &amp; Germany" data-de="Essays &amp; Deutschland" data-ar="مقالات وألمانيا">Essays &amp; Germany</button>
+        </div>
+      </div>
+
+      <div class="films-grid" id="filmsGrid">
+        <!-- Film 1 (Featured): Hangzhou at Night -->
+        <article class="film-card film-featured" data-cat="china" data-vid="NxxHqwq5Yxw" data-title="The Shocking Truth About China's Cities at Night… Magical Hangzhou!" data-cursor-ring="PLAY FILM · 13:06 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/NxxHqwq5Yxw.jpg" alt="Magical Hangzhou at Night" loading="lazy" />
+            <span class="film-cat-badge" data-en="NIGHT DOCUMENTARY" data-de="NACHT-DOKU" data-ar="وثائقي ليلي">NIGHT DOCUMENTARY</span>
+            <span class="film-duration">13:06</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play Film" data-de="&#9654; Film abspielen" data-ar="&#9654; تشغيل الفلم">&#9654; Play Film</span></div>
+          </div>
+          <div class="film-body">
+            <div>
+              <div class="film-meta-top">
+                <span>DOCUMENTARY</span>
+                <span>&#1575;&#1604;&#1581;&#1602;&#1610;&#1602;&#1577; &#1575;&#1604;&#1589;&#1575;&#1583;&#1605;&#1577; &#1593;&#1606; &#1605;&#1583;&#1606; &#1575;&#1604;&#1589;&#1610;&#1606;</span>
+              </div>
+              <h3 class="film-title" style="margin-top:8px;" data-en="The Shocking Truth About China&rsquo;s Cities at Night&hellip; Magical Hangzhou!" data-de="Die Wahrheit über Chinas Städte bei Nacht&hellip; Magisches Hangzhou!" data-ar="الحقيقة الصادمة عن مدن الصين في الليل… هانجو الخيالية!">The Shocking Truth About China&rsquo;s Cities at Night&hellip; Magical Hangzhou!</h3>
+            </div>
+            <div class="film-footer-row">
+              <span data-en="Watch Film" data-de="Film ansehen" data-ar="مشاهدة الفلم">Watch Film</span>
+              <span>&#9654; 13:06</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Film 2 (Featured): AGAIN Short Film -->
+        <article class="film-card film-featured" data-cat="short" data-vid="kqXdaYvlxCs" data-title="AGAIN — Narrative Short Film | فلم قصير" data-cursor-ring="SHORT FILM · 02:30 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/kqXdaYvlxCs.jpg" alt="AGAIN — Short Film by Ahmed Bayour" loading="lazy" />
+            <span class="film-cat-badge" data-en="SHORT FILM" data-de="KURZFILM" data-ar="فلم قصير">SHORT FILM</span>
+            <span class="film-duration">02:30</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play Short Film" data-de="&#9654; Kurzfilm abspielen" data-ar="&#9654; تشغيل الفلم القصير">&#9654; Play Short Film</span></div>
+          </div>
+          <div class="film-body">
+            <div>
+              <div class="film-meta-top">
+                <span>DIRECTOR &middot; DP &middot; EDITOR</span>
+                <span>&#1601;&#1604;&#1605; &#1602;&#1589;&#1610;&#1585;</span>
+              </div>
+              <h3 class="film-title" style="margin-top:8px;" data-en="AGAIN &mdash; Narrative Short Film" data-de="AGAIN &mdash; Narrativer Kurzfilm" data-ar="AGAIN &mdash; فلم روائي قصير">AGAIN &mdash; Narrative Short Film</h3>
+            </div>
+            <div class="film-footer-row">
+              <span data-en="Watch Short Film" data-de="Kurzfilm ansehen" data-ar="مشاهدة الفلم القصير">Watch Short Film</span>
+              <span>&#9654; 02:30</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Film 3: First 48 Hours in China -->
+        <article class="film-card" data-cat="china" data-vid="GFMrYnryZNs" data-title="My First 48 Hours in China" data-cursor-ring="WATCH DOC · 07:49 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/GFMrYnryZNs.jpg" alt="My First 48 Hours in China" loading="lazy" />
+            <span class="film-cat-badge" data-en="DOC VLOG" data-de="DOKU-VLOG" data-ar="وثائقي">DOC VLOG</span>
+            <span class="film-duration">07:49</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="My First 48 Hours in China: Chaos &amp; Culture Shock" data-de="Meine ersten 48 Stunden in China: Chaos &amp; Kulturschock" data-ar="أول 48 ساعة في الصين: الفوضى، الصدمة، والسكن الجديد">My First 48 Hours in China: Chaos &amp; Culture Shock</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 4: Longest 24 Hours -->
+        <article class="film-card" data-cat="china" data-vid="0tnVRjdPmsw" data-title="The Longest 24 Hours: Journey Across the World" data-cursor-ring="WATCH DOC · 08:24 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/0tnVRjdPmsw.jpg" alt="Longest 24 Hours of My Life" loading="lazy" />
+            <span class="film-cat-badge" data-en="TRAVEL FILM" data-de="REISEFILM" data-ar="فلم سفر">TRAVEL FILM</span>
+            <span class="film-duration">08:24</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="The Longest 24 Hours: Journey to the Other Side of the World" data-de="Die längsten 24 Stunden: Reise ans andere Ende der Welt" data-ar="أطول 24 ساعة في حياتي: رحلتي إلى الجانب الآخر من العالم">The Longest 24 Hours: Journey to the Other Side of the World</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 5: How I Shot My Short Film From My Room -->
+        <article class="film-card" data-cat="short" data-vid="OZret3KxcOw" data-title="How I Shot My Short Film From My Room" data-cursor-ring="BTS CRAFT · 08:53 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/OZret3KxcOw.jpg" alt="How I Shot My Short Film From My Room" loading="lazy" />
+            <span class="film-cat-badge" data-en="BEHIND THE SCENES" data-de="MAKING-OF" data-ar="كواليس التصوير">BEHIND THE SCENES</span>
+            <span class="film-duration">08:53</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="How I Shot My Short Film Entirely From My Room" data-de="Wie ich meinen Kurzfilm komplett in meinem Zimmer gedreht habe" data-ar="كيف صورت فلمي القصير من غرفتي؟">How I Shot My Short Film Entirely From My Room</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 6: Ich hab ALLES ausprobiert (German) -->
+        <article class="film-card" data-cat="essay" data-vid="0pPqpX5v9xM" data-title="Ich hab ALLES ausprobiert … das ist meine LETZTE Chance!" data-cursor-ring="PLAY ESSAY · 04:25 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/0pPqpX5v9xM.jpg" alt="Ich hab ALLES ausprobiert" loading="lazy" />
+            <span class="film-cat-badge" data-en="GERMAN ESSAY" data-de="DEUTSCH · ESSAY" data-ar="مقال بالألمانية">GERMAN ESSAY</span>
+            <span class="film-duration">04:25</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="I Tried EVERYTHING &hellip; This Is My LAST Chance! (DE)" data-de="Ich hab ALLES ausprobiert &hellip; das ist meine LETZTE Chance!" data-ar="جربت كل شيء… وهذه فرصتي الأخيرة! (بالألمانية)">I Tried EVERYTHING &hellip; This Is My LAST Chance! (DE)</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 7: Camera Gear & Optics -->
+        <article class="film-card" data-cat="short" data-vid="PJueS89vrqo" data-title="Camera Gear & Rigging Breakdown" data-cursor-ring="GEAR TECH · 10:52 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/PJueS89vrqo.jpg" alt="Camera Rig and Optics" loading="lazy" />
+            <span class="film-cat-badge" data-en="CAMERA GEAR" data-de="KAMERA-TECHNIK" data-ar="معدات التصوير">CAMERA GEAR</span>
+            <span class="film-duration">10:52</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="This Piece of Gear Changed How I Shoot" data-de="Wie dieses Kamera-Gear meinen Look verändert hat" data-ar="هاي القطعة خلتني أصوّر زي المحترفين؟!">This Piece of Gear Changed How I Shoot</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 8: Smartphone Addiction & Digital Attention -->
+        <article class="film-card" data-cat="essay" data-vid="WscHtTHZ018" data-title="Smartphone Addiction — Who Is Really in Control?" data-cursor-ring="MEDIA ESSAY · 04:45 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/WscHtTHZ018.jpg" alt="Smartphone Addiction Visual Essay" loading="lazy" />
+            <span class="film-cat-badge" data-en="VISUAL ESSAY" data-de="VIDEO-ESSAY" data-ar="مقال بصري">VISUAL ESSAY</span>
+            <span class="film-duration">04:45</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="Smartphone Addiction: Who Is Really in Control?" data-de="Smartphone-Sucht: Wer kontrolliert wen?" data-ar="إدمان الموبايل… مين المسيطر الحقيقي؟">Smartphone Addiction: Who Is Really in Control?</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 9: Illusion of Celebrity Life -->
+        <article class="film-card" data-cat="essay" data-vid="KelQyXupy-Y" data-title="The Illusion of Celebrity Life" data-cursor-ring="VISUAL ESSAY · 04:43 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/KelQyXupy-Y.jpg" alt="Illusion of Social Media" loading="lazy" />
+            <span class="film-cat-badge" data-en="MEDIA ESSAY" data-de="MEDIEN-ESSAY" data-ar="تحليل إعلامي">MEDIA ESSAY</span>
+            <span class="film-duration">04:43</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="The Illusion of Perfection &amp; Reality Behind the Frame" data-de="Die Illusion der Perfektion &amp; die Realität dahinter" data-ar="وهم حياة المشاهير… والواقع اللي ما بتشوفوه!">The Illusion of Perfection &amp; Reality Behind the Frame</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+
+        <!-- Film 10: Abitur in Germany -->
+        <article class="film-card" data-cat="essay" data-vid="JGbSUgFUO1c" data-title="Abitur in Germany 🇩🇪: My Real Experience" data-cursor-ring="GERMANY DOC · 09:00 ·">
+          <div class="film-thumb-wrap">
+            <img src="assets/thumbs/JGbSUgFUO1c.jpg" alt="Abitur in Germany" loading="lazy" />
+            <span class="film-cat-badge" data-en="GERMANY &#127465;&#127466;" data-de="DEUTSCHLAND &#127465;&#127466;" data-ar="ألمانيا &#127465;&#127466;">GERMANY &#127465;&#127466;</span>
+            <span class="film-duration">09:00</span>
+            <div class="film-play-overlay"><span class="film-play-pill" data-en="&#9654; Play" data-de="&#9654; Abspielen" data-ar="&#9654; تشغيل">&#9654; Play</span></div>
+          </div>
+          <div class="film-body">
+            <h3 class="film-title" data-en="Abitur in Germany &#127465;&#127466;: My Real Experience" data-de="Abitur in Deutschland &#127465;&#127466;: Meine echte Erfahrung" data-ar="البكالوريا في ألمانيا &#127465;&#127466;: تجربتي الحقيقية!">Abitur in Germany &#127465;&#127466;: My Real Experience</h3>
+            <div class="film-footer-row"><span data-en="Watch" data-de="Ansehen" data-ar="مشاهدة">Watch</span><span>&#9654;</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 4: INTERACTIVE CS & MEDIA DESIGN WORKBENCH (BAYOXR_OS)
+         ====================================================================== -->
+    <section class="lab-section" id="lab">
+      <div class="lab-header">
+        <div>
+          <span class="kicker-tag"><span class="kicker-dot mint"></span><span data-en="04 // INTERACTIVE CS &amp; MEDIA LAB" data-de="04 // INTERAKTIVES CS &amp; MEDIA LAB" data-ar="04 // مختبر البرمجة والتصميم التفاعلي">04 // INTERACTIVE CS &amp; MEDIA LAB</span></span>
+          <h2 class="section-Display" style="margin-top: 10px;" data-slide data-en="Interactive Workbench" data-de="Interaktive Workbench" data-ar="مساحة العمل التفاعلية">Interactive Workbench</h2>
+        </div>
+        <p class="caps" style="color:var(--fg-muted);" data-en="DRAG CARDS ON THE MUSEO BOARD OR RUN TERMINAL COMMANDS" data-de="VERSCHIEBE DIE KARTEN IM MUSEO-BOARD ODER NUTZE DAS TERMINAL" data-ar="اسحب البطاقات في مساحة Museo أو جرب أوامر الطرفية">
+          DRAG CARDS ON THE MUSEO BOARD OR RUN TERMINAL COMMANDS
+        </p>
+      </div>
+
+      <!-- Real GitHub Profile & Flagship Repository Banner (github.com/bayoxr & bayoxr/museo) -->
+      <div class="github-repo-banner">
+        <div class="gh-banner-left">
+          <img class="gh-avatar" src="assets/thumbs/avatar.jpg" alt="Ahmed Bayour GitHub @bayoxr" />
+          <div class="gh-meta">
+            <span class="gh-badge"><span class="kicker-dot mint"></span>GITHUB // @BAYOXR</span>
+            <h3 data-en="bayoxr/museo &mdash; Visual Workspace for Creative Projects" data-de="bayoxr/museo &mdash; Visueller Workspace für Kreativprojekte" data-ar="مشروع bayoxr/museo &mdash; مساحة عمل بصرية للمشاريع الإبداعية">bayoxr/museo &mdash; Visual Workspace for Creative Projects</h3>
+          </div>
+        </div>
+        <div class="gh-banner-actions">
+          <a class="btn-primary" href="https://github.com/bayoxr/museo" target="_blank" rel="noopener">
+            <span data-en="Open bayoxr/museo" data-de="bayoxr/museo öffnen" data-ar="فتح مستودع Museo">Open bayoxr/museo</span>
+            <span>&#8599;</span>
+          </a>
+          <a class="btn-ghost" href="https://github.com/bayoxr" target="_blank" rel="noopener">
+            <span data-en="GitHub @bayoxr" data-de="GitHub @bayoxr" data-ar="حساب GitHub">GitHub @bayoxr</span>
+            <span>&#8599;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="os-desktop">
+        <!-- Studio Menu Bar -->
+        <div class="os-menubar">
+          <div class="os-menubar-left">
+            <span class="os-apple-mark">&#9670; BAYOXR STUDIO</span>
+            <span>Museo</span>
+            <span>github.com/bayoxr</span>
+          </div>
+          <div class="os-menubar-right">
+            <span>60 FPS</span>
+            <span id="osClock">00:00:00</span>
+          </div>
+        </div>
+
+        <div class="os-workspace">
+          <!-- WINDOW 1: Museo Interactive Spatial Canvas -->
+          <div class="os-window win-museo">
+            <div class="win-titlebar">
+              <div class="win-dots"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span></div>
+              <div class="win-title">
+                <span>Museo &mdash; github.com/bayoxr/museo</span>
+              </div>
+              <span class="win-badge" data-en="DRAG CARDS" data-de="VERSCHIEBBAR" data-ar="اسحب البطاقات">DRAG CARDS</span>
+            </div>
+
+            <div class="museo-toolbar">
+              <div class="museo-brand-pill">
+                <span class="mu-icon-badge">Mu</span>
+                <span><strong>Bayoxr_Board.museo</strong></span>
+              </div>
+              <div class="museo-actions">
+                <button class="mu-btn is-active" type="button" data-mu-grid="dots" data-en="Dots" data-de="Punkte" data-ar="نقاط">Dots</button>
+                <button class="mu-btn" type="button" data-mu-grid="lines" data-en="Grid" data-de="Raster" data-ar="شبكة">Grid</button>
+                <button class="mu-btn" type="button" data-mu-grid="blueprint" data-en="Blueprint" data-de="Blueprint" data-ar="مخطط">Blueprint</button>
+                <button class="mu-btn" type="button" id="muAddCardBtn" data-en="+ Card" data-de="+ Karte" data-ar="+ بطاقة">+ Card</button>
+                <button class="mu-btn" type="button" id="muResetBoardBtn" data-en="Reset" data-de="Reset" data-ar="إعادة">Reset</button>
+              </div>
+            </div>
+
+            <div class="museo-canvas" id="museoCanvas" data-grid="dots">
+              <svg class="museo-wires" id="museoWires"></svg>
+
+              <div class="mu-card" id="muCard1" style="left: 28px; top: 32px;">
+                <img src="assets/thumbs/NxxHqwq5Yxw.jpg" alt="Filmmaking" />
+                <div class="mu-card-tag">01 // FILM</div>
+                <h4 data-en="24fps Cinema" data-de="24fps Kino" data-ar="سينما 24fps">24fps Cinema</h4>
+                <p data-en="Premiere Pro &amp; After Effects." data-de="Premiere Pro &amp; After Effects." data-ar="Premiere Pro وAfter Effects.">Premiere Pro &amp; After Effects.</p>
+              </div>
+
+              <div class="mu-card" id="muCard2" style="left: 285px; top: 54px;">
+                <img src="assets/mood-architecture.jpg" alt="Computer Science" />
+                <div class="mu-card-tag">02 // CS &amp; CODE</div>
+                <h4 data-en="Software &amp; Museo" data-de="Software &amp; Museo" data-ar="البرمجة وMuseo">Software &amp; Museo</h4>
+                <p data-en="Java, C/C++, C#, JS, SQL, Git." data-de="Java, C/C++, C#, JS, SQL, Git." data-ar="Java, C/C++, C#, JS, SQL, Git.">Java, C/C++, C#, JS, SQL, Git.</p>
+              </div>
+
+              <div class="mu-card" id="muCard3" style="left: 150px; top: 270px;">
+                <img src="assets/mood-studio.jpg" alt="Media Design" />
+                <div class="mu-card-tag">03 // DESIGN</div>
+                <h4 data-en="Media Design" data-de="Mediendesign" data-ar="التصميم الإعلامي">Media Design</h4>
+                <p data-en="Figma, Photoshop &amp; Illustrator." data-de="Figma, Photoshop &amp; Illustrator." data-ar="Figma وPhotoshop وIllustrator.">Figma, Photoshop &amp; Illustrator.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 2: bayoxr-cli Interactive Terminal -->
+          <div class="os-window win-terminal">
+            <div class="win-titlebar">
+              <div class="win-dots"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span></div>
+              <div class="win-title"><span>bayoxr@studio: ~ (zsh)</span></div>
+              <span class="win-badge">CLI</span>
+            </div>
+
+            <div class="terminal-body" id="terminalOutput">
+              <div class="term-line"><span class="term-prompt">bayoxr ~ %</span> <span class="term-cmd">whoami</span></div>
+              <div class="term-line term-out" data-en="&rarr; <strong>Ahmed Bayour (@bayoxr)</strong> | Filmmaker &bull; CS &bull; Media Designer" data-de="&rarr; <strong>Ahmed Bayour (@bayoxr)</strong> | Filmmaker &bull; Informatiker &bull; Mediendesigner" data-ar="&rarr; <strong>أحمد بيور (@bayoxr)</strong> | صانع أفلام &bull; عالم حاسوب &bull; مصمم إعلامي">&rarr; <strong>Ahmed Bayour (@bayoxr)</strong> | Filmmaker &bull; CS &bull; Media Designer</div>
+              <div class="term-line term-out" data-en="&rarr; Stack: Java, C/C++, C#, JS, HTML/CSS, SQL, Git, Linux" data-de="&rarr; Stack: Java, C/C++, C#, JS, HTML/CSS, SQL, Git, Linux" data-ar="&rarr; التقنيات: Java, C/C++, C#, JS, HTML/CSS, SQL, Git, Linux">&rarr; Stack: Java, C/C++, C#, JS, HTML/CSS, SQL, Git, Linux</div>
+              <div class="term-line term-out" data-en="&rarr; Click a command below:" data-de="&rarr; Klicke unten auf einen Befehl:" data-ar="&rarr; اضغط على أمر بالأسفل:">&rarr; Click a command below:</div>
+            </div>
+
+            <div class="term-quick-bar">
+              <button class="term-chip" type="button" data-term-cmd="skills">skills</button>
+              <button class="term-chip" type="button" data-term-cmd="github">github</button>
+              <button class="term-chip" type="button" data-term-cmd="museo">museo</button>
+              <button class="term-chip" type="button" data-term-cmd="films">films</button>
+              <button class="term-chip" type="button" data-term-cmd="socials">socials</button>
+              <button class="term-chip" type="button" data-term-cmd="clear">clear</button>
+            </div>
+
+            <form class="term-input-row" id="terminalForm">
+              <span class="term-prompt">%</span>
+              <input class="term-input" id="terminalInput" type="text"
+                placeholder="Type command (skills, github, museo, films, socials)..."
+                data-placeholder-en="Type command (skills, github, museo, films, socials)..."
+                data-placeholder-de="Befehl eingeben (skills, github, museo, films, socials)..."
+                data-placeholder-ar="اكتب أمراً (skills, github, museo, films, socials)..."
+                autocomplete="off" />
+            </form>
+          </div>
+
+          <!-- WINDOW 3: Procedural Rolling Polygon Canvas -->
+          <div class="os-window win-shader">
+            <div class="win-titlebar">
+              <div class="win-dots"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span></div>
+              <div class="win-title"><span data-en="Geometry &amp; Motion Lab" data-de="Geometrie- &amp; Motion-Lab" data-ar="مختبر الهندسة والحركة">Geometry &amp; Motion Lab</span></div>
+              <span class="win-badge">CANVAS 2D</span>
+            </div>
+
+            <div class="shader-stage-wrap">
+              <canvas id="polyRoadCanvas"></canvas>
+              <div class="shader-controls">
+                <label>
+                  <span>SIDES (<strong id="polySidesVal">6</strong>):</span>
+                  <input type="range" id="polySidesSlider" min="4" max="16" step="1" value="6" />
+                </label>
+                <label>
+                  <span>SPEED:</span>
+                  <input type="range" id="polySpeedSlider" min="1" max="10" value="4" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 5: ABOUT & CAPABILITY MATRIX
+         ====================================================================== -->
+    <section class="story-section" id="story">
+      <div class="story-grid">
+        <div>
+          <span class="kicker-tag"><span class="kicker-dot"></span><span data-en="05 // ABOUT &amp; TECH STACK" data-de="05 // ÜBER MICH &amp; TECH STACK" data-ar="05 // نبذة عني والتقنيات">05 // ABOUT &amp; TECH STACK</span></span>
+          <h2 class="story-lead" data-en="Syrian-German student combining <em>Cinema, Code, and Design</em>." data-de="Syrisch-Deutscher Student zwischen <em>Kino, Code und Design</em>." data-ar="طالب سوري-ألماني يجمع بين <em>السينما، البرمجة، والتصميم</em>.">
+            Syrian-German student combining <em>Cinema, Code, and Design</em>.
+          </h2>
+          <p class="story-prose" data-en="Based in Germany, I study Media and Computer Science while producing films and visual stories on YouTube (@bayoxr). Whether I'm directing a short film, writing software in Java, C++, C#, or JavaScript, or designing interfaces in Figma — my goal is to build work that feels alive." data-de="In Deutschland verwurzelt, studiere ich Medien und Informatik und produziere parallel Filme auf YouTube (@bayoxr). Ob ich einen Kurzfilm drehe, Software in Java, C++, C# oder JavaScript entwickle oder Interfaces in Figma gestalte — mein Anspruch ist immer, etwas Besonderes zu schaffen." data-ar="أقيم في ألمانيا وأدرس الإعلام وعلوم الحاسوب بالتوازي مع صناعة الأفلام على يوتيوب (@bayoxr). سواء كنت أخرج فلماً قصيراً، أو أطور برمجيات بلغات Java وC++ وC# وJavaScript، أو أصمم واجهات في Figma — هدفي دائماً هو ابتكار أعمال تنبض بالحياة.">
+            Based in Germany, I study Media and Computer Science while producing films and visual stories on YouTube (@bayoxr). Whether I'm directing a short film, writing software in Java, C++, C#, or JavaScript, or designing interfaces in Figma — my goal is to build work that feels alive.
+          </p>
+
+          <div class="banner-showcase">
+            <img src="assets/thumbs/banner.jpg" alt="Ahmed Bayour (@bayoxr) Channel Banner" loading="lazy" />
+            <div class="banner-caption">
+              <span>@BAYOXR</span>
+              <span>ENGLISH &bull; DEUTSCH &bull; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Count-Up Stats Bento -->
+          <div class="stats-bento">
+            <div class="stat-box stat-vermilion">
+              <span class="stat-num" data-count="48" data-suffix="+">48+</span>
+              <span class="stat-label" data-en="Videos on YouTube (@bayoxr)" data-de="Videos auf YouTube (@bayoxr)" data-ar="فيديو على يوتيوب (@bayoxr)">Videos on YouTube (@bayoxr)</span>
+            </div>
+            <div class="stat-box stat-mint">
+              <span class="stat-num" data-count="1420" data-suffix="+">1420+</span>
+              <span class="stat-label" data-en="YouTube Subscribers" data-de="YouTube Abonnenten" data-ar="مشترك على يوتيوب">YouTube Subscribers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num" data-count="24" data-suffix="fps">24fps</span>
+              <span class="stat-label" data-en="Filmmaking &amp; Storytelling" data-de="Filmmaking &amp; Storytelling" data-ar="صناعة الأفلام والسرد البصري">Filmmaking &amp; Storytelling</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num" data-count="3" data-suffix="×">3×</span>
+              <span class="stat-label" data-en="Film · Computer Science · Design" data-de="Film · Informatik · Design" data-ar="سينما · علوم حاسوب · تصميم">Film · Computer Science · Design</span>
+            </div>
+          </div>
+
+          <h3 class="stack-matrix-title" data-en="TOOLS &amp; TECHNOLOGIES" data-de="TOOLS &amp; TECHNOLOGIEN" data-ar="الأدوات والتقنيات">TOOLS &amp; TECHNOLOGIES</h3>
+          <ul class="matrix-rows">
+            <li>
+              <span data-en="01 // Filmmaking &amp; Editing" data-de="01 // Filmmaking &amp; Schnitt" data-ar="01 // صناعة الأفلام والمونتاج">01 // Filmmaking &amp; Editing</span>
+              <em>Adobe Premiere Pro &middot; After Effects &middot; 4K Cinema</em>
+            </li>
+            <li>
+              <span data-en="02 // Programming &amp; CS" data-de="02 // Programmierung &amp; Informatik" data-ar="02 // البرمجة وعلوم الحاسوب">02 // Programming &amp; CS</span>
+              <em>Java &middot; C / C++ &middot; C# &middot; SQL &middot; Git &middot; Linux</em>
+            </li>
+            <li>
+              <span data-en="03 // Web &amp; Open Source" data-de="03 // Web &amp; Open Source" data-ar="03 // تطوير الويب والمشاريع">03 // Web &amp; Open Source</span>
+              <em>JavaScript &middot; HTML5 &middot; CSS3 &middot; github.com/bayoxr/museo</em>
+            </li>
+            <li>
+              <span data-en="04 // Media Design" data-de="04 // Mediendesign" data-ar="04 // التصميم الإعلامي">04 // Media Design</span>
+              <em>Figma &middot; Adobe Photoshop &middot; Adobe Illustrator</em>
+            </li>
+            <li>
+              <span data-en="05 // Languages" data-de="05 // Sprachen" data-ar="05 // اللغات">05 // Languages</span>
+              <em>Deutsch &middot; English &middot; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BAND 6: CONTACT & SOCIAL LINKS
+         ====================================================================== -->
+    <section class="cta-section" id="contact">
+      <span class="kicker-tag"><span class="kicker-dot"></span><span data-en="06 // CONNECT" data-de="06 // KONTAKT" data-ar="06 // تواصل معي">06 // CONNECT</span></span>
+      <h2 class="cta-headline" style="margin-top: 14px;" data-slide data-en="Let&rsquo;s build something <em>Extraordinary</em>." data-de="Lass uns etwas <em>Besonderes</em> schaffen." data-ar="لنصنع معاً عملاً <em>استثنائياً</em>.">
+        Let&rsquo;s build something <em>Extraordinary</em>.
+      </h2>
+
+      <!-- Pointer-Driven Polygon Morph Track -->
+      <div class="cta-track-wrap">
+        <div class="cta-track" id="ctaMorphTrack">
+          <div class="cta-track-bg-text">
+            <span>01 // FILM</span>
+            <span>02 // CODE</span>
+            <span>03 // DESIGN</span>
+            <span>04 // @BAYOXR &rarr;</span>
+          </div>
+          <a class="morph-cta-link" id="morphCtaLink" href="links.html">
+            <svg viewBox="0 0 220 220" aria-hidden="true">
+              <path id="morphCtaPath" fill="var(--vermilion)" d="M110,12 L208,110 L110,208 L12,110 Z" />
+            </svg>
+            <span data-en="ALL LINKS<br />@BAYOXR &#8599;" data-de="ALLE LINKS<br />@BAYOXR &#8599;" data-ar="جميع الروابط<br />@BAYOXR &#8599;">ALL LINKS<br />@BAYOXR &#8599;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Social & Contact Bar -->
+      <div class="inquiry-bar">
+        <div>
+          <p class="caps" style="color:var(--fg-muted);margin-bottom:10px;" data-en="Connect with Ahmed Bayour (@bayoxr):" data-de="Vernetze dich mit Ahmed Bayour (@bayoxr):" data-ar="تواصل مع أحمد بيور (@bayoxr):">Connect with Ahmed Bayour (@bayoxr):</p>
+          <div class="inquiry-chips">
+            <a class="inq-chip is-selected" href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener">YouTube @bayoxr &#8599;</a>
+            <a class="inq-chip" href="https://www.instagram.com/bayoxr" target="_blank" rel="noopener">Instagram @bayoxr &#8599;</a>
+            <a class="inq-chip" href="https://www.tiktok.com/@bayoxr" target="_blank" rel="noopener">TikTok @bayoxr &#8599;</a>
+            <a class="inq-chip" href="https://github.com/bayoxr" target="_blank" rel="noopener">GitHub @bayoxr &#8599;</a>
+          </div>
+        </div>
+
+        <div class="inquiry-actions">
+          <a class="btn-primary" href="links.html">
+            <span data-en="Open Mobile Links Hub" data-de="Social-Links-Hub öffnen" data-ar="فتح صفحة جميع الروابط">Open Mobile Links Hub</span>
+            <span>&#8599;</span>
+          </a>
+          <button class="btn-ghost" id="copyHandleBtn" type="button">
+            <span id="copyHandleText" data-en="Copy @bayoxr Link" data-de="@bayoxr Link kopieren" data-ar="نسخ رابط @bayoxr">Copy @bayoxr Link</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       MONUMENTAL FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="foot-grid">
+      <div class="foot-cell">
+        <p class="caps" style="color:var(--vermilion);margin-bottom:14px;">AHMED BAYOUR // @BAYOXR</p>
+        <p class="foot-claim" data-en="&ldquo;I don&rsquo;t just film, I feel.&rdquo;<br />Filmmaker, Computer Scientist &amp; Media Designer." data-de="&bdquo;I don&rsquo;t just film, I feel.&ldquo;<br />Filmmaker, Informatiker &amp; Mediendesigner." data-ar="&laquo;أنا لا أصوّر فقط، بل أشعر.&raquo;<br />صانع أفلام، عالم حاسوب ومصمم إعلامي.">
+          &ldquo;I don&rsquo;t just film, I feel.&rdquo;<br />Filmmaker, Computer Scientist &amp; Media Designer.
+        </p>
+      </div>
+
+      <div class="foot-cell">
+        <p class="caps" style="color:rgba(255,255,255,0.5);margin-bottom:16px;" data-en="SOCIALS &amp; GITHUB" data-de="SOCIAL MEDIA &amp; GITHUB" data-ar="القنوات الرسمية وGITHUB">SOCIALS &amp; GITHUB</p>
+        <nav class="foot-links" aria-label="Social Links">
+          <a href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener"><span>YouTube (@bayoxr)</span><span>1.42K+ &middot; 48 Videos &#8599;</span></a>
+          <a href="https://www.instagram.com/bayoxr" target="_blank" rel="noopener"><span>Instagram (@bayoxr)</span><span>@bayoxr &#8599;</span></a>
+          <a href="https://www.tiktok.com/@bayoxr" target="_blank" rel="noopener"><span>TikTok (@bayoxr)</span><span>@bayoxr &#8599;</span></a>
+          <a href="https://github.com/bayoxr" target="_blank" rel="noopener"><span>GitHub (@bayoxr)</span><span>bayoxr/museo &#8599;</span></a>
+          <a href="links.html"><span data-en="Social Links Page" data-de="Social-Links-Seite" data-ar="صفحة الروابط المختصرة">Social Links Page</span><span>links.html &rarr;</span></a>
+        </nav>
+      </div>
+
+      <div class="foot-cell">
+        <p class="caps" style="color:rgba(255,255,255,0.5);margin-bottom:16px;" data-en="LOCATION &amp; TIME" data-de="STANDORT &amp; ZEIT" data-ar="الموقع والتوقيت">LOCATION &amp; TIME</p>
+        <div class="foot-clocks">
+          <div class="clock-item">
+            <svg class="clock-svg" viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <line x1="20" y1="20" x2="20" y2="9" stroke="currentColor" stroke-width="1.6" id="clockHandBerlinH" />
+              <line x1="20" y1="20" x2="28" y2="20" stroke="var(--vermilion)" stroke-width="1.4" id="clockHandBerlinM" />
+              <circle cx="20" cy="20" r="2" fill="currentColor" />
+            </svg>
+            <div>
+              <div class="clock-city" data-en="GERMANY &#127465;&#127466; (CET)" data-de="DEUTSCHLAND &#127465;&#127466; (CET)" data-ar="ألمانيا &#127465;&#127466; (CET)">GERMANY &#127465;&#127466; (CET)</div>
+              <div class="clock-time" data-tz="Europe/Berlin">--:--:--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monumental Wordmark with 7-Shape Radial Morphing Counter inside the "O" -->
+    <div class="foot-monument">
+      <svg class="foot-wordmark-svg" viewBox="0 0 1200 220" aria-label="BAYOXR">
+        <text x="20" y="178" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="200" letter-spacing="-6" fill="#f5f3ee">BAY</text>
+        <circle cx="715" cy="110" r="78" fill="#f5f3ee" />
+        <path id="footerOMorphPath" fill="#ff5121" d="M715,62 L763,110 L715,158 L667,110 Z" />
+        <text x="808" y="178" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="200" letter-spacing="-6" fill="#f5f3ee">XR</text>
+      </svg>
+    </div>
+
+    <div class="foot-legal">
+      <span>&copy; 2026 AHMED BAYOUR (@BAYOXR)</span>
+      <a href="#top" style="color:var(--mint);" data-en="BACK TO TOP &uarr;" data-de="NACH OBEN &uarr;" data-ar="العودة للأعلى &uarr;">BACK TO TOP &uarr;</a>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       SCREENING ROOM MODAL (#filmModal)
+       ======================================================================== -->
+  <div class="film-modal" id="filmModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="film-modal-dialog">
+      <div class="film-modal-top">
+        <span class="mono" style="font-size:11px;letter-spacing:0.16em;color:var(--vermilion);">BAYOXR // 24FPS SCREENING</span>
+        <button class="loader-skip" id="closeModalBtn" type="button" data-en="&times; CLOSE [ESC]" data-de="&times; SCHLIESSEN [ESC]" data-ar="&times; إغلاق [ESC]">&times; CLOSE [ESC]</button>
+      </div>
+      <div class="film-modal-player" id="modalPlayerMount"></div>
+      <div class="film-modal-bottom">
+        <div>
+          <h3 id="modalFilmTitle" style="font-size:20px;font-weight:600;">Film Title</h3>
+          <p class="mono" style="font-size:11px;color:var(--fg-muted);margin-top:4px;">AHMED BAYOUR (@BAYOXR)</p>
+        </div>
+        <a class="btn-primary" id="modalYoutubeBtn" href="https://www.youtube.com/@bayoxr" target="_blank" rel="noopener">
+          <span data-en="Watch on YouTube" data-de="Auf YouTube ansehen" data-ar="المشاهدة على يوتيوب">Watch on YouTube</span>
+          <span>&#8599;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Vendored GSAP + ScrollTrigger + Lenis -->
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
